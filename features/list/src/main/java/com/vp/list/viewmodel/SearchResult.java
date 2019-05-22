@@ -12,7 +12,11 @@ public class SearchResult {
     private int totalResult;
     private ListState listState;
 
-    private SearchResult(List<ListItem> items, int totalResult, ListState listState) {
+    SearchResult() {
+
+    }
+
+    SearchResult(List<ListItem> items, int totalResult, ListState listState) {
         this.items = items;
         this.listState = listState;
         this.totalResult = totalResult;
@@ -50,6 +54,18 @@ public class SearchResult {
         return totalResult == that.totalResult &&
                 Objects.equals(items, that.items) &&
                 listState == that.listState;
+    }
+
+    public void setItems(List<ListItem> items) {
+        this.items = items;
+    }
+
+    public void setTotalResult(int totalResult) {
+        this.totalResult = totalResult;
+    }
+
+    public void setListState(ListState listState) {
+        this.listState = listState;
     }
 
     @Override

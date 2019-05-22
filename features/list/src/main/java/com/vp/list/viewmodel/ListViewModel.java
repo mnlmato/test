@@ -48,7 +48,10 @@ public class ListViewModel extends ViewModel {
                 SearchResponse result = response.body();
 
                 if (result != null) {
-                    aggregatedItems.addAll(result.getSearch());
+                    //aggregatedItems.addAll(result.getSearch());
+
+
+                    liveData.setValue(getSearchResults(result));
                 }
             }
 
@@ -57,5 +60,14 @@ public class ListViewModel extends ViewModel {
                 liveData.setValue(SearchResult.error());
             }
         });
+    }
+
+    private SearchResult getSearchResults(SearchResponse searchResponse) {
+        SearchResult searchResult = new SearchResult();
+        searchResult.setItems(searchResponse.getSearch());
+        searchResult.setTotalResult(searchResponse.getTotalResults());
+        searchResult.setListState(ListState.LOADED);
+
+        return searchResult;
     }
 }
