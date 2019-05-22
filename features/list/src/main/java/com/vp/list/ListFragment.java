@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +101,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3);
         recyclerView.setLayoutManager(layoutManager);
 
+
         // Pagination
         gridPagingScrollListener = new GridPagingScrollListener(layoutManager);
         gridPagingScrollListener.setLoadMoreItemsListener(this);
@@ -164,6 +167,18 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
 
     @Override
     public void onItemClick(String imdbID) {
-        //TODO handle click events
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(buildDetailDestination(imdbID)));
+        intent.setPackage(requireContext().getPackageName());
+        startActivity(intent);
+    }
+
+    private String buildDetailDestination(String imdbID) {
+        return new Uri.Builder()
+                .scheme("app")
+                .authority("movies")
+                .appendPath("detail")
+                .appendQueryParameter("imdbID", imdbID)
+                .fragment("section-name")
+                .toString();
     }
 }
