@@ -4,4 +4,5 @@
     <string name="data_loading_error">Data loading error</string>
     <string name="favorites">Favorites</string>
     <string name="movies">Movies</string>
+    <string name="reload">Reload</string>
 </resources>

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,8 @@ import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class ListFragment extends Fragment implements GridPagingScrollListener.LoadMoreItemsListener, ListAdapter.OnItemClickListener {
+public class ListFragment extends Fragment implements GridPagingScrollListener.LoadMoreItemsListener,
+        ListAdapter.OnItemClickListener {
     public static final String TAG = "ListFragment";
     private static final String CURRENT_QUERY = "current_query";
 
@@ -36,12 +36,14 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
     ViewModelProvider.Factory factory;
 
     private ListViewModel listViewModel;
+
     private GridPagingScrollListener gridPagingScrollListener;
     private ListAdapter listAdapter;
     private ViewAnimator viewAnimator;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TextView errorTextView;
+
     private String currentQuery = "Interview";
 
     @Override
@@ -87,6 +89,8 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("app://movies/favorites"));
                 intent.setPackage(requireContext().getPackageName());
                 startActivity(intent);
+            } else if (item.getItemId() == R.id.reload) {
+                listViewModel.searchMoviesByTitle(currentQuery, 1);
             }
             return true;
         });
@@ -100,7 +104,6 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3);
         recyclerView.setLayoutManager(layoutManager);
-
 
         // Pagination
         gridPagingScrollListener = new GridPagingScrollListener(layoutManager);

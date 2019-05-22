@@ -7,4 +7,11 @@
         android:icon="@drawable/ic_star"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/reload"
+        android:enabled="true"
+        android:icon="@drawable/ic_restore_black_24dp"
+        android:title="@string/reload"
+        app:showAsAction="ifRoom" />
 </menu>
