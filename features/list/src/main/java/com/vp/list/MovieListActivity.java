@@ -3,6 +3,8 @@ package com.vp.list;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,11 +20,13 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class MovieListActivity extends AppCompatActivity implements HasSupportFragmentInjector {
     private static final String IS_SEARCH_VIEW_ICONIFIED = "is_search_view_iconified";
+    private static final String OUT_STATE_USER_MOVIE_KEYWORD = "OUT_STATE_USER_MOVIE_KEYWORD";
 
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingActivityInjector;
     private SearchView searchView;
     private boolean searchViewExpanded = true;
+    private String userMovieKeyword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MovieListActivity extends AppCompatActivity implements HasSupportFr
                     .commit();
         } else {
             searchViewExpanded = savedInstanceState.getBoolean(IS_SEARCH_VIEW_ICONIFIED);
+            userMovieKeyword = savedInstanceState.getString(OUT_STATE_USER_MOVIE_KEYWORD);
         }
     }
 
@@ -49,16 +54,22 @@ public class MovieListActivity extends AppCompatActivity implements HasSupportFr
         searchView = (SearchView) menuItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         searchView.setIconified(searchViewExpanded);
+        searchView.setQuery(this.userMovieKeyword, true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 ListFragment listFragment = (ListFragment) getSupportFragmentManager().findFragmentByTag(ListFragment.TAG);
-                listFragment.submitSearchQuery(query);
+                if (listFragment != null) {
+                    listFragment.submitSearchQuery(query);
+                }
+
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                userMovieKeyword = newText;
+
                 return false;
             }
         });
@@ -70,6 +81,7 @@ public class MovieListActivity extends AppCompatActivity implements HasSupportFr
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(IS_SEARCH_VIEW_ICONIFIED, searchView.isIconified());
+        outState.putString(OUT_STATE_USER_MOVIE_KEYWORD, this.userMovieKeyword);
     }
 
     @Override
