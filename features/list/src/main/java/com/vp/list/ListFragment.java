@@ -79,7 +79,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
             }
         });
         listViewModel.searchMoviesByTitle(currentQuery, 1);
-        showProgressBar();
+        //showProgressBar();
     }
 
     private void initBottomNavigation(@NonNull View view) {
@@ -91,6 +91,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
                 startActivity(intent);
             } else if (item.getItemId() == R.id.reload) {
                 listViewModel.searchMoviesByTitle(currentQuery, 1);
+                this.recyclerView.smoothScrollToPosition(0);
             }
             return true;
         });
