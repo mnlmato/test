@@ -46,6 +46,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TextView errorTextView;
+    private TextView emptyDataTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String currentQuery = "Interview";
@@ -88,6 +89,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
         viewAnimator = view.findViewById(R.id.viewAnimator);
         progressBar = view.findViewById(R.id.progressBar);
         errorTextView = view.findViewById(R.id.errorText);
+        emptyDataTextView = view.findViewById(R.id.emptyDataText);
         swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
     }
 
@@ -158,19 +160,27 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
     private void onSearchResultReceived(@NonNull SearchResult searchResult) {
         switch (searchResult.getListState()) {
             case LOADED: {
-                setItemsData(searchResult);
-                showList();
+                showResults(searchResult);
                 break;
             }
-            case IN_PROGRESS: {
+            case IN_PROGRESS:
                 showProgressBar();
                 break;
-            }
-            default: {
+
+            case EMPTY_DATA:
+                showEmptyData();
+                break;
+
+            default:
                 showError();
-            }
+
         }
         gridPagingScrollListener.markLoading(false);
+    }
+
+    private void showResults(SearchResult searchResult) {
+        setItemsData(searchResult);
+        showList();
     }
 
     private void setItemsData(@NonNull SearchResult searchResult) {
@@ -182,16 +192,28 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
     }
 
     private void showList() {
-        errorTextView.setVisibility(View.INVISIBLE);
-        viewAnimator.setDisplayedChild(viewAnimator.indexOfChild(recyclerView));
+        recyclerView.setVisibility(View.VISIBLE);
+        setViewAnimatorVisibility(View.INVISIBLE);
     }
 
     private void showProgressBar() {
+        setViewAnimatorVisibility(View.VISIBLE);
         viewAnimator.setDisplayedChild(viewAnimator.indexOfChild(progressBar));
     }
 
     private void showError() {
+        setViewAnimatorVisibility(View.VISIBLE);
         viewAnimator.setDisplayedChild(viewAnimator.indexOfChild(errorTextView));
+    }
+
+    private void showEmptyData() {
+        recyclerView.setVisibility(View.INVISIBLE);
+        setViewAnimatorVisibility(View.VISIBLE);
+        viewAnimator.setDisplayedChild(viewAnimator.indexOfChild(emptyDataTextView));
+    }
+
+    private void setViewAnimatorVisibility(int visibility) {
+        viewAnimator.setVisibility(visibility);
     }
 
     @Override

@@ -48,10 +48,7 @@ public class ListViewModel extends ViewModel {
                 SearchResponse result = response.body();
 
                 if (result != null) {
-                    //aggregatedItems.addAll(result.getSearch());
-
-
-                    liveData.setValue(getSearchResults(result));
+                    liveData.setValue(mapToSearchResultFrom(result));
                 }
             }
 
@@ -62,11 +59,16 @@ public class ListViewModel extends ViewModel {
         });
     }
 
-    private SearchResult getSearchResults(SearchResponse searchResponse) {
+    private SearchResult mapToSearchResultFrom(SearchResponse searchResponse) {
         SearchResult searchResult = new SearchResult();
-        searchResult.setItems(searchResponse.getSearch());
-        searchResult.setTotalResult(searchResponse.getTotalResults());
-        searchResult.setListState(ListState.LOADED);
+
+        if (searchResponse.getSearch().isEmpty()) {
+            searchResult.setListState(ListState.EMPTY_DATA);
+        } else {
+            searchResult.setItems(searchResponse.getSearch());
+            searchResult.setTotalResult(searchResponse.getTotalResults());
+            searchResult.setListState(ListState.LOADED);
+        }
 
         return searchResult;
     }
