@@ -23,30 +23,16 @@ class DetailsViewModel @Inject constructor(private val detailService: DetailServ
     private val title: MutableLiveData<String> = MutableLiveData()
     private val loadingState: MutableLiveData<LoadingState> = MutableLiveData()
 
-    /**
-     *  Is not necessary that the activity calls this method, so it is better to convert fetchDetails
-     *  in private method and fetch the data when the activity initialize the viewModel
-     *
-     *  Is better to create too a Sealed class with the response type because in this case only is
-     *  necessary one livedata
-     *
-     *  The architecture is not good because the presenter layer cannot to call directly the datasource layer.
-     *  Is necessary a repository layer and a business layer, but I don´t know if in the MVVM architecture,
-     *  the viewModel can to do the business logic.
-     * */
-    init {
-        fetchDetails()
-    }
-
     fun title(): LiveData<String> = title
 
     fun details(): LiveData<MovieDetail> = details
 
     fun state(): LiveData<LoadingState> = loadingState
 
-    private fun fetchDetails() {
+    fun fetchDetails(movieId: String) {
         loadingState.value = LoadingState.IN_PROGRESS
-        detailService.getMovie(DetailActivity.queryProvider.getMovieId()).enqueue(object : Callback, retrofit2.Callback<MovieDetail> {
+
+        detailService.getMovie(movieId).enqueue(object : Callback, retrofit2.Callback<MovieDetail> {
             override fun onResponse(call: Call<MovieDetail>?, response: Response<MovieDetail>?) {
                 details.postValue(response?.body())
 
@@ -69,26 +55,6 @@ class DetailsViewModel @Inject constructor(private val detailService: DetailServ
             val favouriteMovie = DetailMovieMapper.mapFrom(details.value!!)
             detailDatabase.saveMovie(favouriteMovie)
         }
-    }
-
-    private fun mapper(realmMovies: RealmResults<FavouriteMovieRealm>): List<FavouriteMovieModel> {
-        val movies = mutableListOf<FavouriteMovieModel>()
-
-        realmMovies.forEach {
-            movies.add(
-                    FavouriteMovieModel(
-                            id = it.id,
-                            title = it.title,
-                            year = it.year,
-                            runtime = it.runtime,
-                            director = it.director,
-                            plot = it.plot,
-                            poster = it.poster
-                    )
-            )
-        }
-
-        return movies
     }
 
     enum class LoadingState {

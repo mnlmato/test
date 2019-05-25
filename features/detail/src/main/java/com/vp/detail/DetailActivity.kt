@@ -7,13 +7,14 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.vp.core.ui.constants.IntentQueryKeys
 import com.vp.detail.databinding.ActivityDetailBinding
 import com.vp.detail.viewmodel.DetailsViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import kotlin.run
 
-class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
+class DetailActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -23,8 +24,8 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initQueryProvider()
         bindingActivityComponents()
+        fetchFavouriteMovie()
         observerMovieTitle()
     }
 
@@ -41,26 +42,26 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
         detailViewModel = ViewModelProviders.of(this, factory).get(DetailsViewModel::class.java)
     }
 
-    private fun initQueryProvider() {
-        queryProvider = this
-    }
-
     private fun observerMovieTitle() {
         detailViewModel.title().observe(this, Observer {
             supportActionBar?.title = it
         })
     }
 
+    private fun fetchFavouriteMovie() {
+        detailViewModel.fetchDetails(getMovieId())
+    }
+
+    private fun getMovieId(): String {
+        return intent?.data?.getQueryParameter(IntentQueryKeys.IMDB_MOVIE_ID) ?: run {
+            throw IllegalStateException("You must provide movie id to display details")
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
 
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun getMovieId(): String {
-        return intent?.data?.getQueryParameter("imdbID") ?: run {
-            throw IllegalStateException("You must provide movie id to display details")
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -75,16 +76,5 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
 
     private fun handleFavouriteButton() {
         detailViewModel.handleFavouriteButton()
-    }
-
-    /**
-     *  Initialize here the queryProvider is an error because the DetailViewModel doesn´t must to kwon
-     *  the activities.  If the ViewModel needs a QueryProvider, dagger must be to provide it.
-     *
-     *  If the DetailsViewModel is shared by other activities, then could have a memory leak when
-     *  the activities is destroyed.
-     * */
-    companion object {
-        lateinit var queryProvider: QueryProvider
     }
 }

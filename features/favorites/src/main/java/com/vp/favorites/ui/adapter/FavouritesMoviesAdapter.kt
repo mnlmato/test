@@ -1,8 +1,9 @@
-package com.vp.favorites
+package com.vp.favorites.ui
 
 import android.view.View
 import com.vp.core.ui.adapter.BaseAdapter
 import com.vp.core.vm.model.FavouriteMovieModel
+import com.vp.favorites.R
 import kotlinx.android.synthetic.main.item_favourite_movie.view.*
 
 class FavouritesMoviesAdapter constructor(movies: List<FavouriteMovieModel>):
