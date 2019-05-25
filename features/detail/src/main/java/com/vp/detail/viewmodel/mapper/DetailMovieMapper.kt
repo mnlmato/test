@@ -1,6 +1,6 @@
 package com.vp.detail.viewmodel.mapper
 
-import com.vp.core.datasource.FavouriteMovieRealm
+import com.vp.core.datasource.model.FavouriteMovieRealm
 import com.vp.core.mapper.BaseMapper
 import com.vp.detail.model.MovieDetail
 

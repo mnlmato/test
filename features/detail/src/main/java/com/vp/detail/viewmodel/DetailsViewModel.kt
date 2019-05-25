@@ -3,13 +3,13 @@ package com.vp.detail.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vp.core.datasource.FavouriteMovieRealm
+import com.vp.core.datasource.model.FavouriteMovieRealm
 import com.vp.detail.DetailActivity
 import com.vp.detail.database.DetailDatabase
 import com.vp.detail.model.MovieDetail
 import com.vp.detail.service.DetailService
 import com.vp.detail.viewmodel.mapper.DetailMovieMapper
-import com.vp.detail.viewmodel.model.FavouriteMovieModel
+import com.vp.core.vm.model.FavouriteMovieModel
 import io.realm.RealmResults
 import retrofit2.Call
 import retrofit2.Response

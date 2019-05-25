@@ -1,4 +1,4 @@
-package com.vp.core.datasource
+package com.vp.core.datasource.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

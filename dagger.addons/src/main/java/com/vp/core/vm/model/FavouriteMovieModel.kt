@@ -1,4 +1,4 @@
-package com.vp.detail.viewmodel.model
+package com.vp.core.vm.model
 
 class FavouriteMovieModel(
         var id: String? = "",

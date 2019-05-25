@@ -1,6 +1,6 @@
 package com.vp.detail.database
 
-import com.vp.core.datasource.FavouriteMovieRealm
+import com.vp.core.datasource.model.FavouriteMovieRealm
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
