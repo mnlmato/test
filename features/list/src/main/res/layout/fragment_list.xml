@@ -28,14 +28,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/data_loading_error" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/emptyDataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

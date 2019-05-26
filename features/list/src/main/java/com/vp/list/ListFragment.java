@@ -1,5 +1,6 @@
 package com.vp.list;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -46,8 +47,8 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
     private ViewAnimator viewAnimator;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private TextView errorTextView;
-    private TextView emptyDataTextView;
+    private AppCompatTextView errorTextView;
+    private AppCompatTextView emptyDataTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String currentQuery = "Interview";
