@@ -3,7 +3,7 @@
     package="com.vp.favorites">
 
     <application>
-        <activity android:name=".FavoriteActivity"
+        <activity android:name=".ui.FavoriteActivity"
             android:label="@string/activity_label"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import com.vp.core.ui.constants.IntentQueryKeys;
 import com.vp.list.viewmodel.SearchResult;
 import com.vp.list.viewmodel.ListViewModel;
 
@@ -248,7 +249,7 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
                 .scheme("app")
                 .authority("movies")
                 .appendPath("detail")
-                .appendQueryParameter("imdbID", imdbID)
+                .appendQueryParameter(IntentQueryKeys.IMDB_MOVIE_ID, imdbID)
                 .fragment("section-name")
                 .toString();
     }

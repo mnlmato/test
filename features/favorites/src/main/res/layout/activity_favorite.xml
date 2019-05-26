@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingEnd="16dp"
     android:paddingStart="16dp"
-    tools:context=".FavoriteActivity">
+    tools:context=".ui.FavoriteActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_favorite_recycler_view"

@@ -23,8 +23,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
-
+/**
+ *  Is is necessary to verify the commons libraries and create a commons module with the commons resources
+ *  and use the "api" and not implementation in the gradle.
+ * */
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':dagger.addons')
@@ -33,6 +40,24 @@ dependencies {
 
     //support
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide"
+
+    //api
+    implementation "com.google.code.gson:gson:$rootProject.gson"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+
+    //architecture components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation("com.google.dagger:dagger-android-support:$rootProject.dagger")
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
 
     //tests
     testImplementation 'junit:junit:4.12'
