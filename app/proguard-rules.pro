@@ -110,6 +110,9 @@
 # JetBrains annotations
 -dontwarn org.jetbrains.annotations.**
 
+#Okio squareapp
+-dontwarn okio.**
+
 # Renderscript
 -keep class android.support.** {*;}
 

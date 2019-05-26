@@ -29,7 +29,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 dependencies {
     implementation project(':dagger.addons')
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.60'
@@ -38,7 +37,6 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$rootProject.glide"
 
     //dagger
-    implementation "com.google.dagger:dagger:$rootProject.dagger"
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     implementation "com.google.dagger:dagger-android:$rootProject.dagger"
     implementation("com.google.dagger:dagger-android-support:$rootProject.dagger")
@@ -48,13 +46,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
 
     //support library
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.supportLibraryVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
     implementation "com.google.android.material:material:$rootProject.supportLibraryVersion"
 
     //api
-    api "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     implementation "com.google.code.gson:gson:$rootProject.gson"
 
     //test
@@ -66,3 +63,4 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
