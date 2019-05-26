@@ -29,6 +29,8 @@ class FavoriteViewModel: ViewModel() {
     /**
      *  The IO operations must be executed in a secondary thread and release the resources in the
      *  onCleared method.
+     *
+     *  Normally I use RxJava, RxKotlin or Coroutines (is better the kotlin version 1.3, not the 1.2.60).
      * */
     private fun loadMoviesFromRepository() {
             screenStatusLiveData.postValue(ScreenStatus.LOADING)

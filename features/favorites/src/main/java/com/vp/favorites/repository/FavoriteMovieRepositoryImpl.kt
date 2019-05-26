@@ -10,5 +10,5 @@ class FavoriteMovieRepositoryImpl constructor(
 ): FavoriteMovieRepository {
 
     override fun getAllMovies(): List<FavouriteMovieModel> =
-            RealmMoviesMapper.mapFrom(favoriteMovieDatabase.getMoviesFromDatabase()!!)
+            RealmMoviesMapper.mapFrom(favoriteMovieDatabase.getMoviesFromDatabase())
 }
