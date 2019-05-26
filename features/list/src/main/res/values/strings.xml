@@ -4,4 +4,6 @@
     <string name="data_loading_error">Data loading error</string>
     <string name="favorites">Favorites</string>
     <string name="movies">Movies</string>
+    <string name="reload">Reload</string>
+    <string name="empty_data_loading">No results for this keyword</string>
 </resources>

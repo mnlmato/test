@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -36,7 +37,7 @@ android {
 
 dependencies {
     implementation project(':dagger.addons')
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.60'
 
@@ -52,7 +53,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
 
     //dagger
-    implementation "com.google.dagger:dagger:$rootProject.dagger"
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     implementation "com.google.dagger:dagger-android:$rootProject.dagger"
     implementation("com.google.dagger:dagger-android-support:$rootProject.dagger")

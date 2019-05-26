@@ -3,8 +3,9 @@
     package="com.vp.favorites">
 
     <application>
-        <activity android:name=".FavoriteActivity"
-            android:label="@string/activity_label">
+        <activity android:name=".ui.FavoriteActivity"
+            android:label="@string/activity_label"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

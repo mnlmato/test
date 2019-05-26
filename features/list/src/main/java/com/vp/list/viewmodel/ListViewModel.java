@@ -48,7 +48,7 @@ public class ListViewModel extends ViewModel {
                 SearchResponse result = response.body();
 
                 if (result != null) {
-                    aggregatedItems.addAll(result.getSearch());
+                    liveData.setValue(mapToSearchResultFrom(result));
                 }
             }
 
@@ -57,5 +57,19 @@ public class ListViewModel extends ViewModel {
                 liveData.setValue(SearchResult.error());
             }
         });
+    }
+
+    private SearchResult mapToSearchResultFrom(SearchResponse searchResponse) {
+        SearchResult searchResult = new SearchResult();
+
+        if (searchResponse.getSearch().isEmpty()) {
+            searchResult.setListState(ListState.EMPTY_DATA);
+        } else {
+            searchResult.setItems(searchResponse.getSearch());
+            searchResult.setTotalResult(searchResponse.getTotalResults());
+            searchResult.setListState(ListState.LOADED);
+        }
+
+        return searchResult;
     }
 }
