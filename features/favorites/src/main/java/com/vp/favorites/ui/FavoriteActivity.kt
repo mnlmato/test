@@ -1,6 +1,7 @@
 package com.vp.favorites.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -41,15 +42,23 @@ class FavoriteActivity : AppCompatActivity() {
     }
 
     private fun showSpinner() {
-
+        activity_favorite_progress_bar.visibility = View.VISIBLE
+        activity_favorite_recycler_view.visibility = View.GONE
     }
 
     private fun showFavouritesMovies(movies: List<FavouriteMovieModel>) {
+        showRecyclerView()
+
         val adapter = FavouritesMoviesAdapter(movies)
         activity_favorite_recycler_view.adapter = adapter
         activity_favorite_recycler_view.setHasFixedSize(true)
 
-        val linearyLayoutManager = LinearLayoutManager(this)
-        activity_favorite_recycler_view.layoutManager = linearyLayoutManager
+        val linearLayoutManager = LinearLayoutManager(this)
+        activity_favorite_recycler_view.layoutManager = linearLayoutManager
+    }
+
+    private fun showRecyclerView() {
+        activity_favorite_progress_bar.visibility = View.GONE
+        activity_favorite_recycler_view.visibility = View.VISIBLE
     }
 }

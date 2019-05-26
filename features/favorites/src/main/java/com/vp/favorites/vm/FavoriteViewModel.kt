@@ -29,7 +29,8 @@ class FavoriteViewModel: ViewModel() {
     }
 
     /**
-     *  It is necessary to create a class Repository and Database class but I am not a Dagger master.
+     *  It is necessary to create a class Repository and Database class but I am not a Dagger master
+     *  to do the setup.
      * */
     private fun getMoviesFromRepository(): List<FavouriteMovieModel> {
         val moviesDatabase = getMoviesFromDatabase()
@@ -40,4 +41,3 @@ class FavoriteViewModel: ViewModel() {
     private fun getMoviesFromDatabase(): RealmResults<FavouriteMovieRealm> =
             RealmProvider.getRealmInstance().where(FavouriteMovieRealm::class.java).findAll()
 }
-

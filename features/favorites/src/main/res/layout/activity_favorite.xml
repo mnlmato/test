@@ -8,10 +8,23 @@
     android:paddingStart="16dp"
     tools:context=".ui.FavoriteActivity">
 
+    <include
+        layout="@layout/progress_bar"
+        android:id="@+id/activity_favorite_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_favorite_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
